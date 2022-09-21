@@ -1,3 +1,5 @@
+package Lab_1;
+
 /**
  * Class checks if word is a palidrome
  */

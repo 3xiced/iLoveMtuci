@@ -1,3 +1,5 @@
+package Lab_1;
+
 /**
  * Class that checks first 100 numbers to be a prime number
  */
