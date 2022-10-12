@@ -1,6 +1,9 @@
 package tasks;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class AllInOne {
     public static void main(String[] args) {
@@ -144,6 +147,81 @@ public class AllInOne {
          * возвращает количество полей на этом шаге последовательности.
          */
         System.out.println(boxSeq(2));
+        /*
+         * 1. Квадратное уравнение ax2 + bx + c = 0 имеет либо 0, либо 1, либо 2
+         * различных
+         * решения для действительных значений x. учитывая a, b и c, вы должны вернуть
+         * число решений в уравнение.
+         */
+        System.out.println(solutions(1, 0, -1));
+        /*
+         * 2. Напишите функцию, которая возвращает позицию второго вхождения " zip " в
+         * строку, или -1, если оно не происходит по крайней мере дважды. Ваш код должен
+         * быть достаточно общим, чтобы передать все возможные случаи, когда "zip" может
+         * произойти в строке.
+         * 
+         */
+        System.out.println(findZip("all zip files are zipped"));
+        /*
+         * 3. Создайте функцию, которая проверяет, является ли целое число совершенным
+         * числом или нет. Совершенное число - это число, которое можно записать как
+         * сумму его множителей, исключая само число.
+         * Например, 6-это идеальное число, так как 1 + 2 + 3 = 6, где 1, 2 и 3-Все
+         * коэффициенты 6.
+         * Точно так же 28-это совершенное число, так как 1 + 2 + 4 + 7 + 14 = 28.
+         */
+        System.out.println(checkPerfect(6));
+        /*
+         * 4. Создайте функцию, которая принимает строку и возвращает новую строку с
+         * заменой ее первого и последнего символов, за исключением трех условий:
+         * – Если длина строки меньше двух, верните "несовместимо".".
+         * – Если первый и последний символы совпадают, верните "два-это пара.".
+         */
+        System.out.println(findEndChars("Cat, dog, and mouse."));
+        /*
+         * 5. Создайте функцию, которая определяет, является ли строка допустимым
+         * шестнадцатеричным кодом.
+         * Шестнадцатеричный код должен начинаться с фунтового ключа # и иметь длину
+         * ровно 6
+         * символов. Каждый символ должен быть цифрой от 0-9 или буквенным символом от
+         * A-F.
+         * все буквенные символы могут быть прописными или строчными.
+         */
+        System.out.println(isValidHexCode("#CD5C5C"));
+        /*
+         * 6. Напишите функцию, которая возвращает true, если два массива имеют
+         * одинаковое
+         * количество уникальных элементов, и false в противном случае.
+         */
+        System.out.println(same(new int[] { 1, 1, 2, 4 }, new int[] { 1, 1, 4, 7 }));
+        /*
+         * 7. Число Капрекара-это положительное целое число, которое после возведения в
+         * квадрат и разбиения на две лексикографические части равно сумме двух
+         * полученных новых чисел:
+         * – Если количество цифр квадратного числа четное, то левая и правая части
+         * будут иметь
+         * одинаковую длину.
+         * – Если количество цифр квадратного числа нечетно, то правая часть будет самой
+         * длинной
+         * половиной, а левая-самой маленькой или равной нулю, если количество цифр
+         * равно 1.
+         */
+        System.out.println(iskaprekar(3));
+        /*
+         * 8. Напишите функцию, которая возвращает самую длинную последовательность
+         * последовательных нулей в двоичной строке.
+         */
+        System.out.println(longestZero("11000010010"));
+        /*
+         * 9. Если задано целое число, создайте функцию, которая возвращает следующее
+         * простое число. Если число простое, верните само число.
+         */
+        System.out.println(nextPrime(12));
+        /*
+         * 10. Учитывая три числа, x, y и z, определите, являются ли они ребрами
+         * прямоугольного треугольника.
+         */
+        System.out.println(checkValidity(3, 4, 5));
     }
 
     private static int remainder(int value1, int value2) {
@@ -319,5 +397,170 @@ public class AllInOne {
             }
         }
         return count;
+    }
+
+    private static int solutions(int a, int b, int c) {
+        double D = b * b - 4 * a * c;
+        if (D > 0) {
+            return 2;
+        } else if (D == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    private static int findZip(String str) {
+        int number = 9999999;
+        int k = 0;
+        int offset = 0;
+        while (number != -1) {
+            number = str.indexOf("zip");
+            if (number != -1) {
+                offset += number;
+                str = str.substring(number + 3, str.length());
+                // System.out.println(str);
+                // System.out.println(offset);
+                k++;
+                if (k == 2) {
+                    return offset + 3;
+                } else if (k > 2) {
+                    return -1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private static boolean checkPerfect(int numero) {
+        int Z = 0;
+        for (int i = 1; i < numero; i++) {
+            if (numero % i == 0) {
+                Z += i;
+            }
+        }
+        return (Z == numero) ? true : false;
+    }
+
+    private static String findEndChars(String str) {
+        if (str.length() <= 2)
+            return "Incompatible.";
+        char[] ch1 = new char[str.length()];
+
+        for (int i = 0; i < str.length(); i++) {
+            ch1[i] = str.charAt(i);
+        }
+        if (ch1[0] == ch1[str.length() - 1])
+            return "Two's a pair";
+        char buffer = ch1[0];
+        String output = "";
+        for (int i = 1; i < ch1.length - 1; i++) {
+            output += ch1[i];
+        }
+        output = ch1[ch1.length - 1] + output;
+        output = output + ch1[0];
+        return output;
+    }
+
+    private static boolean isValidHexCode(String code) {
+        Pattern pattern = Pattern.compile("^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$");
+        Matcher matcher = pattern.matcher(code);
+        return matcher.matches();
+    }
+
+    private static boolean same(int[] array1, int[] array2) {
+        int[] noDuplicates1 = IntStream.of(array1).distinct().toArray();
+        int[] noDuplicates2 = IntStream.of(array1).distinct().toArray();
+        return noDuplicates1.length == noDuplicates2.length;
+    }
+
+    private static boolean iskaprekar(int n) {
+        if (n == 1)
+            return true;
+
+        // Count number of digits in square
+        int sq_n = n * n;
+        int count_digits = 0;
+        while (sq_n != 0) {
+            count_digits++;
+            sq_n /= 10;
+        }
+
+        sq_n = n * n; // Recompute square as it was changed
+
+        // Split the square at different points and see if sum
+        // of any pair of splitted numbers is equal to n.
+        for (int r_digits = 1; r_digits < count_digits; r_digits++) {
+            int eq_parts = (int) Math.pow(10, r_digits);
+
+            // To avoid numbers like 10, 100, 1000 (These are not
+            // Kaprekar numbers
+            if (eq_parts == n)
+                continue;
+
+            // Find sum of current parts and compare with n
+            int sum = sq_n / eq_parts + sq_n % eq_parts;
+            if (sum == n)
+                return true;
+        }
+
+        // compare with original number
+        return false;
+    }
+
+    private static String longestZero(String str) {
+        char[] ch1 = new char[str.length()];
+
+        for (int i = 0; i < str.length(); i++) {
+            ch1[i] = str.charAt(i);
+        }
+        int counter = 0;
+        int max = 0;
+        for (char c : ch1) {
+            if (c == '0') {
+                counter++;
+                if (counter > max) {
+                    max = counter;
+                }
+            } else {
+                counter = 0;
+            }
+        }
+        String out = "";
+        for (int i = 0; i < max; i++) {
+            out += "0";
+        }
+        return out;
+    }
+
+    private static boolean isPrime(int num) {
+        boolean flag = false;
+        for (int i = 2; i <= num / 2; ++i) {
+            if (num % i == 0) {
+                flag = true;
+                break;
+            }
+        }
+        return !flag;
+    }
+
+    private static int nextPrime(int numero) {
+        if (isPrime(numero))
+            return numero;
+        else {
+            for (int i = numero; i < numero + 10000; i++) {
+                if (isPrime(i))
+                    return i;
+            }
+            return numero;
+        }
+    }
+
+    private static boolean checkValidity(int a, int b, int c) {
+        // check condition
+        if (a + b <= c || a + c <= b || b + c <= a)
+            return false;
+        else
+            return true;
     }
 }
