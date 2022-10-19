@@ -1,9 +1,19 @@
 package tasks;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class AllInOne {
     public static void main(String[] args) {
@@ -97,7 +107,7 @@ public class AllInOne {
          * котором каждое целое число является суммой самого себя + всех предыдущих
          * чисел в массиве.
          */
-        var res = cumulativeSum(new int[] { 1, 2, 3 });
+        int[] res = cumulativeSum(new int[] { 1, 2, 3 });
         for (int i : res) {
             System.out.println(i);
         }
@@ -222,6 +232,124 @@ public class AllInOne {
          * прямоугольного треугольника.
          */
         System.out.println(checkValidity(3, 4, 5));
+        /*
+         * 1. Число Белла - это количество способов, которыми массив из n элементов
+         * может
+         * быть разбит на непустые подмножества. Создайте функцию, которая принимает
+         * число n и возвращает соответствующее число Белла.
+         */
+        System.out.println(bell(3));
+        /*
+         * 2. В «поросячей латыни» (свинский латинский) есть два очень простых правила:
+         * – Если слово начинается с согласного, переместите первую букву (буквы) слова
+         * до
+         * гласного до конца слова и добавьте «ay» в конец.
+         * have ➞ avehay
+         * cram ➞ amcray
+         * take ➞ aketay
+         * cat ➞ atcay
+         * shrimp ➞ impshray
+         * trebuchet ➞ ebuchettray
+         * – Если слово начинается с гласной, добавьте "yay" в конце слова.
+         * ate ➞ ateyay
+         * apple ➞ appleyay
+         * oaken ➞ oakenyay
+         * eagle ➞ eagleyay
+         * Напишите две функции, чтобы сделать переводчик с английского на свинский
+         * латинский.
+         * Первая функция translateWord (word) получает слово на английском и возвращает
+         * это
+         * слово, переведенное на латинский язык. Вторая функция translateSentence
+         * (предложение)
+         * берет английское предложение и возвращает это предложение, переведенное на
+         * латинский
+         * язык.
+         */
+        System.out.println(translateWord("apple"));
+        System.out.println(translateSentence("I like to eat honey waffles."));
+        /*
+         * 3. Учитывая параметры RGB (A) CSS, определите, является ли формат принимаемых
+         * значений допустимым или нет. Создайте функцию, которая принимает строку
+         * (например, " rgb(0, 0, 0)") и возвращает true, если ее формат правильный, в
+         * противном случае возвращает false.
+         */
+        System.out.println(validColor("rgb(255,256,255)"));
+        System.out.println(stripUrlParams("https://edabit.com?a=1&b=2&a=2", new String[] { "b" }));
+        /*
+         * 5. Напишите функцию, которая извлекает три самых длинных слова из заголовка
+         * газеты и преобразует их в хэштеги. Если несколько слов одинаковой длины,
+         * найдите слово, которое встречается первым.
+         */
+        System.out.println(Arrays.toString(getHashtags("Hey Parents, Surprise, Fruit Juice Is Not Fruit")));
+        /*
+         * 6. Последовательность Улама начинается с:
+         * ulam = [1, 2]
+         * Следующее число в последовательности - это наименьшее положительное число,
+         * равное
+         * сумме двух разных чисел (которые уже есть в последовательности) ровно одним
+         * способом. Тривиально, это 3, так как в стартовой последовательности есть
+         * только 2 числа.
+         * ulam = [1, 2, 3]
+         * Следующее число 4, которое является суммой 3 + 1. 4 также равно 2 + 2, но это
+         * уравнение
+         * не учитывается, так как 2 добавления должны быть различны.
+         * ulam = [1, 2, 3, 4]
+         * Следующее число не может быть 5, так как 5 = 1 + 4, но также и 5 = 2 + 3.
+         * Должен быть
+         * только один способ сделать число Улама из 2 различных добавлений, найденных в
+         * последовательности. Следующее число 6 (2 + 4). Есть 2 способа сделать 7 (1 +
+         * 6 или 3 +
+         * 4), поэтому следующий - 8 (2 + 6). И так далее.
+         * ulam = [1, 2, 3, 4, 6, 8, 11, 13, 16, 18, 26, 28, 36, 38, 47, 48, 53,
+         * …]
+         * Создайте функцию, которая принимает число n и возвращает n-е число в
+         * последовательности Улама.
+         * Пример:
+         * ulam(4) ➞ 4
+         * ulam(9) ➞ 16
+         * ulam(206) ➞ 1856
+         */
+        // System.out.println(ulam(206));
+        /*
+         * 7. Напишите функцию, которая возвращает самую длинную неповторяющуюся
+         * подстроку для строкового ввода.
+         */
+        System.out.println(longestNonRepeatingString("abcabcbb"));
+        /*
+         * 8. Создайте функцию, которая принимает арабское число и преобразует его в
+         * римское
+         * число
+         */
+        System.out.println(convertToRoman(312));
+        /*
+         * 9. Создайте функцию, которая принимает строку и возвращает true или false в
+         * зависимости от того, является ли формула правильной или нет.
+         */
+        System.out.println(formula("4+2=6=3+3"));
+        /*
+         * 10. Число может не быть палиндромом, но его потомком может быть. Прямой
+         * потомок
+         * числа создается путем суммирования каждой пары соседних цифр, чтобы создать
+         * цифры следующего числа.
+         * Например, 123312 – это не палиндром, а его следующий потомок 363, где: 3 = 1
+         * + 2; 6 = 3
+         * + 3; 3 = 1 + 2.
+         * Создайте функцию, которая возвращает значение true, если само число является
+         * палиндромом или любой из его потомков вплоть до 2 цифр (однозначное число -
+         * тривиально палиндром).
+         * Пример:
+         * palindromedescendant(11211230) ➞ true
+         * // 11211230 ➞ 2333 ➞ 56 ➞ 11
+         * palindromeDescendant(13001120) ➞ true
+         * // 13001120 ➞ 4022 ➞ 44
+         * palindromeDescendant(23336014) ➞ true
+         * // 23336014 ➞ 5665
+         * palindromeDescendant(11) ➞ true
+         * // Number itself is a palindrome.
+         * Примечание:
+         * – Числа всегда будут иметь четное число цифр.
+         */
+        System.out.println(palindromeDescendant(11211230));
     }
 
     private static int remainder(int value1, int value2) {
@@ -419,8 +547,6 @@ public class AllInOne {
             if (number != -1) {
                 offset += number;
                 str = str.substring(number + 3, str.length());
-                // System.out.println(str);
-                // System.out.println(offset);
                 k++;
                 if (k == 2) {
                     return offset + 3;
@@ -478,7 +604,6 @@ public class AllInOne {
         if (n == 1)
             return true;
 
-        // Count number of digits in square
         int sq_n = n * n;
         int count_digits = 0;
         while (sq_n != 0) {
@@ -486,19 +611,14 @@ public class AllInOne {
             sq_n /= 10;
         }
 
-        sq_n = n * n; // Recompute square as it was changed
+        sq_n = n * n;
 
-        // Split the square at different points and see if sum
-        // of any pair of splitted numbers is equal to n.
         for (int r_digits = 1; r_digits < count_digits; r_digits++) {
             int eq_parts = (int) Math.pow(10, r_digits);
 
-            // To avoid numbers like 10, 100, 1000 (These are not
-            // Kaprekar numbers
             if (eq_parts == n)
                 continue;
 
-            // Find sum of current parts and compare with n
             int sum = sq_n / eq_parts + sq_n % eq_parts;
             if (sum == n)
                 return true;
@@ -562,5 +682,236 @@ public class AllInOne {
             return false;
         else
             return true;
+    }
+
+    private static int bell(int n) {
+        int[][] bell = new int[n + 1][n + 1];
+        bell[0][0] = 1;
+        for (int i = 1; i <= n; i++) {
+            bell[i][0] = bell[i - 1][i - 1];
+            for (int j = 1; j <= i; j++)
+                bell[i][j] = bell[i - 1][j - 1] + bell[i][j - 1];
+        }
+        return bell[n][0];
+    }
+
+    private static boolean isVowel(char ch) {
+        return (ch == 'A' || ch == 'a' || ch == 'E' || ch == 'e' || ch == 'I' || ch == 'i' || ch == 'O' || ch == 'o'
+                || ch == 'U' || ch == 'u');
+    }
+
+    private static String translateWord(String string) {
+        int stringlength = string.length();
+        int index = -1;
+        if (isVowel(string.charAt(0)))
+            return string + "yay";
+        for (int i = 0; i < stringlength; i++) {
+            if (isVowel(string.charAt(i))) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1)
+            return "-1";
+        return string.substring(index) + string.substring(0, index) + "ay";
+    }
+
+    private static String translateSentence(String string) {
+        String[] words = string.split(" ");
+        String newSentence = "";
+        boolean isCapitalFlag;
+        boolean isDotFlag;
+        for (String string2 : words) {
+            isCapitalFlag = false;
+            isDotFlag = false;
+            if (Character.isUpperCase(string2.charAt(0))) {
+                isCapitalFlag = true;
+                string2 = string2.toLowerCase();
+            }
+            if (string2.charAt(string2.length() - 1) == '.') {
+                string2 = string2.substring(0, string2.length() - 1);
+                isDotFlag = true;
+            }
+            String translated = translateWord(string2);
+            if (isCapitalFlag)
+                translated = translated.substring(0, 1).toUpperCase() + translated.substring(1);
+            if (isDotFlag)
+                translated = translated + ".";
+            newSentence += translated + " ";
+        }
+        return newSentence;
+    }
+
+    private static boolean validColor(String str) {
+        Pattern pattern;
+        String rgb_color_regex = "^rgb\\(\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*\\)$";
+        String rgba_color_regex = "^rgba\\(\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,\\s*((0.[1-9])|[01])\\s*\\)$";
+        if (str.contains("rgba"))
+            pattern = Pattern.compile(rgba_color_regex);
+        else
+            pattern = Pattern.compile(rgb_color_regex);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
+
+    private static String stripUrlParams(String url, String[] paramsToStrip) {
+        if (!url.contains("?"))
+            return url;
+        String[] parts = url.split("\\?");
+        StringBuilder sb = new StringBuilder(parts[0]);
+        String[] params = parts[1].split("&");
+        HashMap<String, String> map = new HashMap();
+        for (String param : params) {
+            String[] parm = param.split("=");
+            map.put(parm[0], parm[1]);
+        }
+
+        LinkedHashSet<String> strip = new LinkedHashSet<>();
+
+        if (paramsToStrip != null)
+            strip.addAll(Arrays.asList(paramsToStrip));
+
+        sb.append("?");
+        int k = 1;
+
+        for (String key : map.keySet()) {
+            if (!strip.contains(key)) {
+                if (k > 1)
+                    sb.append("&");
+                sb.append(key).append("=").append(map.get(key));
+                k++;
+            }
+        }
+        return sb.toString();
+    }
+
+    private static String[] getHashtags(String str) {
+        int count = 3;
+        while (str.indexOf(",") != -1)
+            str = str.replace(",", "");
+        if (str.split(" ").length < 3)
+            count = str.split(" ").length;
+        String[] toReturn = new String[count];
+        for (int i = 0; i < count; i++) {
+            String longest = Arrays.stream(str.split(" "))
+                    .max(Comparator.comparingInt(String::length))
+                    .orElse(null);
+            str = str.replace(longest, "");
+            toReturn[i] = "#" + longest.toLowerCase();
+        }
+        return toReturn;
+    }
+
+    private static int ulam(int n) {
+        Vector<Integer> arr = new Vector<Integer>();
+
+        arr.add(1);
+
+        arr.add(2);
+
+        for (int i = 3; i < 10000; i++) {
+
+            int count = 0;
+
+            for (int j = 0; j < arr.size() - 1; j++) {
+
+                for (int k = j + 1; k < arr.size(); k++) {
+
+                    if (arr.get(j) + arr.get(k) == i) {
+
+                        count++;
+                    }
+                    if (count > 1)
+                        break;
+                }
+                if (count > 1)
+                    break;
+            }
+
+            if (count == 1) {
+                arr.add(i);
+            }
+        }
+        return arr.get(n) - 2;
+    }
+
+    private static String longestNonRepeatingString(String input) {
+        Map<Character, Integer> visited = new HashMap<>();
+        String output = "";
+        for (int start = 0, end = 0; end < input.length(); end++) {
+            char currChar = input.charAt(end);
+            if (visited.containsKey(currChar)) {
+                start = Math.max(visited.get(currChar) + 1, start);
+            }
+            if (output.length() < end - start + 1) {
+                output = input.substring(start, end + 1);
+            }
+            visited.put(currChar, end);
+        }
+        return output;
+    }
+
+    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+    static {
+        map.put(1000, "M");
+        map.put(900, "CM");
+        map.put(500, "D");
+        map.put(400, "CD");
+        map.put(100, "C");
+        map.put(90, "XC");
+        map.put(50, "L");
+        map.put(40, "XL");
+        map.put(10, "X");
+        map.put(9, "IX");
+        map.put(5, "V");
+        map.put(4, "IV");
+        map.put(1, "I");
+    }
+
+    private static String convertToRoman(int number) {
+        int l = map.floorKey(number);
+        if (number == l) {
+            return map.get(number);
+        }
+        return map.get(l) + convertToRoman(number - l);
+    }
+
+    private static boolean formula(String str) {
+        Vector<Integer> toCheck = new Vector<Integer>();
+        String[] array = str.split("=");
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByExtension("js");
+        for (String string : array) {
+            try {
+                toCheck.add((int) engine.eval(string));
+            } catch (ScriptException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        for (int i = 0; i < toCheck.size() - 1; i++) {
+            if (toCheck.get(i) != toCheck.get(i + 1))
+                return false;
+        }
+        return true;
+    }
+
+    private static boolean palindromeDescendant(int num) {
+        String ns = Integer.toString(num);
+        String rs = "";
+        for (int i = 0; i < ns.length(); i++)
+            rs = ns.charAt(i) + rs;
+
+        for (int i = 0; ns.length() >= 2; i++) {
+            if (ns.equals(rs))
+                return true;
+            ns = "";
+            for (int y = rs.length() - 1; y > 0; y = y - 2)
+                ns += Character.getNumericValue(rs.charAt(y)) + Character.getNumericValue(rs.charAt(y - 1));
+            rs = "";
+            for (int x = 0; x < ns.length(); x++)
+                rs = ns.charAt(x) + rs;
+        }
+        return false;
     }
 }
