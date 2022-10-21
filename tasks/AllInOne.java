@@ -1,10 +1,14 @@
 package tasks;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -232,6 +236,199 @@ public class AllInOne {
          * прямоугольного треугольника.
          */
         System.out.println(checkValidity(3, 4, 5));
+        /*
+         * 1. Бесси работает над сочинением для своего класса писателей. Поскольку ее
+         * почерк
+         * довольно плох, она решает напечатать эссе с помощью текстового процессора.
+         * Эссе содержит N слов (1≤N≤100), разделенных пробелами. Каждое слово имеет
+         * длину от 1 до 15 символов включительно и состоит только из прописных или
+         * строчных букв. Согласно инструкции к заданию, эссе должно быть
+         * отформатировано очень специфическим образом: каждая строка должна содержать
+         * не более K (1≤K≤80) символов, не считая пробелов. К счастью, текстовый
+         * процессор Бесси может справиться с этим требованием, используя следующую
+         * стратегию:
+         * – Если Бесси набирает Слово, и это слово может поместиться в текущей строке,
+         * поместите
+         * его в эту строку. В противном случае поместите слово на следующую строку и
+         * продолжайте добавлять к этой строке. Конечно, последовательные слова в одной
+         * строке
+         * все равно должны быть разделены одним пробелом. В конце любой строки не
+         * должно
+         * быть места.
+         * – К сожалению, текстовый процессор Бесси только что сломался. Пожалуйста,
+         * помогите ей правильно оформить свое эссе!
+         * Вам будут даны n, k и строка
+         */
+
+        textProcessor("hello my name is Bessie and this is my essay", 10, 7);
+        /*
+         * 2. Напишите функцию, которая группирует строку в кластер скобок. Каждый
+         * кластер
+         * должен быть сбалансирован.
+         */
+        System.out.println(split("()()()"));
+        /*
+         * 3. Создайте две функции toCamelCase () и toSnakeCase (), каждая из которых
+         * берет
+         * одну строку и преобразует ее либо в camelCase, либо в snake_case.
+         */
+        System.out.println(toCamelCase("hello_edabit"));
+        System.out.println(toSnakeCase("helloEdabit"));
+        /*
+         * 4. Напишите функцию, которая вычисляет сверхурочную работу и оплату,
+         * связанную
+         * с сверхурочной работой.
+         * Работа с 9 до 5: обычные часы работы
+         * После 5 вечера это сверхурочная работа
+         * Ваша функция получает массив с 4 значениями:
+         * – Начало рабочего дня, в десятичном формате, (24-часовая дневная нотация)
+         * – Конец рабочего дня. (Тот же формат)
+         * – Почасовая ставка
+         * – Множитель сверхурочных работ
+         * Ваша функция должна возвращать:
+         * $ + заработанные в тот день (округлены до ближайшей сотой)
+         */
+        System.out.println(overTime(new String[] { "9", "17", "30", "1.5" }));
+        /*
+         * 5. Индекс массы тела (ИМТ) определяется путем измерения вашего веса в
+         * килограммах и деления на квадрат вашего роста в метрах. Категории ИМТ таковы:
+         * Недостаточный вес: <18,5
+         * Нормальный вес: 18.5-24.9
+         * Избыточный вес: 25 и более
+         * Создайте функцию, которая будет принимать вес и рост (в килограммах, фунтах,
+         * метрах или дюймах) и возвращать ИМТ и связанную с ним категорию. Округлите
+         * ИМТ до ближайшей десятой.
+         */
+        System.out.println(BMI(new String[] { "205", "pounds", "73", "inches" }));
+        /*
+         * 6. Создайте функцию, которая принимает число и возвращает его
+         * мультипликативное
+         * постоянство, которое представляет собой количество раз, которое вы должны
+         * умножать цифры в num, пока не достигнете одной цифры.
+         */
+        System.out.println(bugger("39"));
+        /*
+         * 7. Напишите функцию, которая преобразует строку в звездную стенографию. Если
+         * символ повторяется n раз, преобразуйте его в символ*n.
+         */
+        System.out.println(toStarShorthand("abbccc"));
+        /*
+         * 8. Создайте функцию, которая возвращает true, если две строки рифмуются, и
+         * false в
+         * противном случае. Для целей этого упражнения две строки рифмуются, если
+         * последнее слово из каждого предложения содержит одни и те же гласные.
+         */
+        System.out.println(doesRhyme("Sam I am!", "Green eggs and ham."));
+        /*
+         * 9. Создайте функцию, которая принимает два целых числа и возвращает true,
+         * если
+         * число повторяется три раза подряд в любом месте в num1 и то же самое число
+         * повторяется два раза подряд в num2.
+         */
+        System.out.println(trouble(new String[] { "451999277", "41177722899" }));
+        /*
+         * 10. Предположим, что пара одинаковых символов служит концами книги для всех
+         * символов между ними. Напишите функцию, которая возвращает общее количество
+         * уникальных символов (книг, так сказать) между всеми парами концов книги.
+         */
+        System.out.println(countUniqueBooks(new String[] { "AZYWABBCATTTA", "A" }));
+        /*
+         * 1. Пришло время отправлять и получать секретные сообщения.
+         * Создайте две функции, которые принимают строку и массив и возвращают
+         * закодированное или декодированное сообщение.
+         * Первая буква строки или первый элемент массива представляет собой символьный
+         * код
+         * этой буквы. Следующие элементы-это различия между символами: например, A +3
+         * --> C
+         * или z -1 --> y.
+         */
+        encrypt("Hello");
+        System.out.println(decrypt(new int[] { 72, 33, -73, 84, -12, -3, 13, -13, -68 }));
+        /*
+         * 2. Создайте функцию, которая принимает имя шахматной фигуры, ее положение и
+         * целевую позицию. Функция должна возвращать true, если фигура может двигаться
+         * к цели, и false, если она не может этого сделать.
+         * Возможные входные данные - "пешка", "конь", "слон", "Ладья", "Ферзь"и
+         * " король".
+         */
+        System.out.println(canMove("Rook", "A8", "H8"));
+        /*
+         * 3. Входная строка может быть завершена, если можно добавить дополнительные
+         * буквы, и никакие буквы не должны быть удалены, чтобы соответствовать слову.
+         * Кроме того, порядок букв во входной строке должен быть таким же, как и
+         * порядок
+         * букв в последнем слове.
+         * Создайте функцию, которая, учитывая входную строку, определяет, может ли
+         * слово быть
+         * завершено.
+         */
+        System.out.println(canComplete("butl", "beautiful"));
+        /*
+         * 4. Создайте функцию, которая принимает числа в качестве аргументов,
+         * складывает их
+         * вместе и возвращает произведение цифр до тех пор, пока ответ не станет длиной
+         * всего в 1 цифру.
+         */
+        System.out.println(sumDigProd(16, 28));
+        /*
+         * 5. Напишите функцию, которая выбирает все слова, имеющие все те же гласные (в
+         * любом порядке и / или количестве), что и первое слово, включая первое слово.
+         */
+        sameVowelGroup(new String[] { "toe", "ocelot", "maniac" });
+        /*
+         * 6. Создайте функцию, которая принимает число в качестве аргумента и
+         * возвращает
+         * true, если это число является действительным номером кредитной карты, а в
+         * противном случае-false.
+         * Номера кредитных карт должны быть длиной от 14 до 19 цифр и проходить тест
+         * Луна,
+         * описанный ниже:
+         * – Удалите последнюю цифру (это"контрольная цифра").
+         * – Переверните число.
+         * – Удвойте значение каждой цифры в нечетных позициях. Если удвоенное значение
+         * имеет
+         * более 1 цифры, сложите цифры вместе (например, 8 x 2 = 16 ➞ 1 + 6 = 7).
+         * – Добавьте все цифры.
+         * – Вычтите последнюю цифру суммы (из шага 4) из 10. Результат должен быть
+         * равен
+         * контрольной цифре из Шага 1.
+         */
+        System.out.println(validateCard(1234567890123456l));
+        /*
+         * 7. Напишите функцию, которая принимает положительное целое число от 0 до 999
+         * включительно и возвращает строковое представление этого целого числа,
+         * написанное на английском языке.
+         */
+        System.out.println(numToEng(3));
+        /*
+         * 8. Хеш-алгоритмы легко сделать одним способом, но по существу невозможно
+         * сделать наоборот. Например, если вы хешируете что-то простое, например,
+         * password123, это даст вам длинный код, уникальный для этого слова или фразы.
+         * В
+         * идеале, нет способа сделать это в обратном порядке. Вы не можете взять
+         * хеш-код и
+         * вернуться к слову или фразе, с которых вы начали.
+         * Создайте функцию, которая возвращает безопасный хеш SHA-256 для данной
+         * строки.
+         * Хеш должен быть отформатирован в виде шестнадцатеричной цифры.
+         */
+        System.out.println(getSha256Hash("password123"));
+        /*
+         * 9. Напишите функцию, которая принимает строку и возвращает строку с
+         * правильным
+         * регистром для заголовков символов в серии "Игра престолов".
+         * Слова and, the, of и in должны быть строчными. Все остальные слова должны
+         * иметь
+         * первый символ в верхнем регистре, а остальные-в Нижнем.
+         */
+        System.out.println(correctTitle("jOn SnoW, kINg IN thE noRth."));
+        /*
+         * 10. Как указано в онлайн-энциклопедии целочисленных последовательностей:
+         * Гексагональная решетка - это привычная двумерная решетка, в которой каждая
+         * точка
+         * имеет 6 соседей.
+         */
+        System.out.println(hexLattice(7));
         /*
          * 1. Число Белла - это количество способов, которыми массив из n элементов
          * может
@@ -677,7 +874,6 @@ public class AllInOne {
     }
 
     private static boolean checkValidity(int a, int b, int c) {
-        // check condition
         if (a + b <= c || a + c <= b || b + c <= a)
             return false;
         else
@@ -693,6 +889,528 @@ public class AllInOne {
                 bell[i][j] = bell[i - 1][j - 1] + bell[i][j - 1];
         }
         return bell[n][0];
+    }
+
+    private static void textProcessor(String string, int k, int n) {
+        int i = 0, spaceIndex1 = 0, spaceIndex2 = 0;
+        boolean f = true;
+        boolean f1 = true;
+        while (f) {
+
+            while (f1) {
+                spaceIndex1 = string.indexOf(" ");
+                spaceIndex2 = string.indexOf(" ", spaceIndex1 + 1);
+                if (spaceIndex1 < k && spaceIndex2 <= k) {
+                    char sim3 = string.charAt(spaceIndex2);
+                    if (sim3 == ' ') {
+                        i = spaceIndex2;
+                    } else {
+                        i = string.indexOf(" ");
+                    }
+                    break;
+                } else {
+                    if (spaceIndex1 <= k && spaceIndex2 > k) {
+                        char sim3 = string.charAt(spaceIndex2);
+                        if (sim3 == ' ' && (spaceIndex2 == k + 1)) {
+                            i = spaceIndex2;
+                        } else {
+                            i = string.indexOf(" ");
+                        }
+                        break;
+
+                    }
+                    break;
+                }
+            }
+            System.out.println(string.substring(0, i));
+            string = string.substring(i + 1);
+            if (string.length() < k) {
+                System.out.println(string);
+                break;
+            }
+        }
+    }
+
+    private static String split(String line) {
+        int leftCase = 0;
+        int rightCase = 0;
+        String outputLine = "";
+        String currentLine = "";
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == 40) {
+                leftCase += 1;
+                currentLine += line.substring(i, i + 1);
+            } else if (line.charAt(i) == 41) {
+                rightCase += 1;
+                currentLine += line.substring(i, i + 1);
+            }
+
+            if (leftCase == rightCase) {
+                outputLine += currentLine + "\n";
+                currentLine = "";
+                leftCase = 0;
+                rightCase = 0;
+            }
+        }
+        return outputLine;
+    }
+
+    private static String toCamelCase(String word) {
+        String outputString = "";
+        int beginIndex = 0;
+        int currentIndex = 0;
+        while (currentIndex < word.length() - 1) {
+            if (word.substring(currentIndex, currentIndex + 1).equals("_")) {
+                outputString += word.substring(beginIndex, currentIndex)
+                        + word.substring(currentIndex + 1, currentIndex + 2).toUpperCase();
+                currentIndex += 2;
+                beginIndex = currentIndex;
+                if (word.indexOf("_", currentIndex + 2) == -1) {
+                    return outputString += word.substring(currentIndex, word.length());
+                }
+            } else
+                currentIndex += 1;
+        }
+        return outputString;
+    }
+
+    private static String toSnakeCase(String word) {
+        String outputString = "";
+        int currentIndex = 0;
+        int beginIndex = 0;
+        while (currentIndex < word.length() - 1) {
+            if (word.substring(currentIndex, currentIndex + 1).matches("^[A-Z]+$")) {
+                outputString += word.substring(beginIndex, currentIndex) + "_"
+                        + word.substring(currentIndex, currentIndex + 1).toLowerCase();
+                currentIndex += 1;
+                beginIndex = currentIndex;
+
+                if (!word.substring(currentIndex, word.length() - 1).chars().anyMatch(Character::isUpperCase)) {
+                    return outputString += word.substring(currentIndex, word.length());
+                }
+            } else
+                currentIndex += 1;
+        }
+        return outputString;
+    }
+
+    private static String overTime(String[] args) {
+        double beginWork = Double.parseDouble(args[0]);
+        double endWork = Double.parseDouble(args[1]);
+        double hourlyRate = Double.parseDouble(args[2]);
+        double overRate = Double.parseDouble(args[3]);
+
+        if (endWork > 17.00) {
+            return "overwork " + "$"
+                    + String.valueOf((17.00 - beginWork) * hourlyRate + (endWork - 17.00) * hourlyRate * overRate);
+        } else
+            return "normalwork " + "$" + String.valueOf((endWork - beginWork) * hourlyRate);
+    }
+
+    private static String BMI(String[] args) {
+        double weight = Double.parseDouble(args[0]);
+        double height = Double.parseDouble(args[2]);
+        double indexBMI = 0;
+        if (args[1].equals("pounds")) {
+            weight *= 0.45;
+        }
+        if (args[3].equals("inches")) {
+            height += 0.025;
+        }
+
+        double hundred = Math.pow(10, 2);
+        indexBMI = Math.ceil((weight / Math.pow(height, 2)) * hundred) / hundred;
+
+        if (indexBMI > 25) {
+            return indexBMI + " Overweight";
+        } else if (indexBMI < 18.5) {
+            return indexBMI + " Underweight";
+        } else
+            return indexBMI + " Normal weight";
+    }
+
+    private static int bugger(String str) {
+        int currentNum = toCalculate(str);
+        int itterations = 1;
+        if (str.length() == 1) {
+            return 0;
+        }
+        while (currentNum > 9) {
+            itterations += 1;
+            currentNum = toCalculate(Integer.toString(currentNum));
+        }
+        return itterations;
+    }
+
+    public static int toCalculate(String str) {
+        int outputNum = 1;
+        int arraySum[] = new int[str.length()];
+        for (int i = 0; i < str.length(); i++) {
+            arraySum[i] = Integer.parseInt(str.substring(i, i + 1));
+        }
+        for (int i = 0; i < arraySum.length; i++) {
+            outputNum *= arraySum[i];
+        }
+        return outputNum;
+    }
+
+    private static String toStarShorthand(String lines) {
+        String outputStr = "";
+        int counter = 0;
+        String line = lines + "0";
+        for (int i = 0; i < line.length() - 1; i++) {
+            if (!line.substring(i, i + 1).equals(line.substring(i + 1, i + 2)) && counter == 0) {
+                outputStr += line.substring(i, i + 1);
+            }
+
+            else if (line.substring(i, i + 1).equals(line.substring(i + 1, i + 2))) {
+                counter += 1;
+            } else {
+                outputStr += line.substring(i, i + 1) + "*" + (counter + 1);
+                counter = 0;
+            }
+        }
+        return outputStr;
+    }
+
+    private static Boolean doesRhyme(String line1, String line2) {
+        String lineCheck1 = line1;
+        String lineCheck2 = line2;
+        if (lineCheck1.substring(lineCheck1.length() - 1, lineCheck1.length()).matches("[?!.]($|\\s)")) {
+            lineCheck1 = lineCheck1.substring(0, lineCheck1.length() - 1);
+        }
+
+        if (lineCheck2.substring(lineCheck2.length() - 1, lineCheck2.length()).matches("[?!.]($|\\s)")) {
+            lineCheck2 = lineCheck2.substring(0, lineCheck2.length() - 1);
+        }
+
+        if (lineCheck1.substring(lineCheck1.length() - 2, lineCheck1.length())
+                .equals(lineCheck2.substring(lineCheck2.length() - 2, lineCheck2.length()))) {
+            return true;
+        } else
+            return false;
+    }
+
+    private static Boolean trouble(String[] strings) {
+        String first = strings[0];
+        String second = strings[1];
+        int ch = 0;
+        for (int i = 0; i < first.length() - 2; i++) {
+            if ((first.charAt(i) == first.charAt(i + 1)) && (first.charAt(i) == first.charAt(i + 2))) {
+                ch = first.charAt(i);
+            }
+        }
+        if (ch == 0) {
+            return false;
+        }
+        for (int i = 0; i < second.length() - 1; i++) {
+            if ((second.charAt(i) == ch) && (second.charAt(i + 1) == ch)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int countUniqueBooks(String[] strings) {
+        String[] _strings = strings[0].split("");
+        Set<String> stringSet = new HashSet<String>();
+        int k = 0;
+        for (int i = 0; i < _strings.length; i++) {
+            if (_strings[i].equals(strings[1])) {
+                k += 1;
+            }
+            if (k % 2 != 0) {
+                stringSet.add(_strings[i]);
+            }
+        }
+        return stringSet.size() - 1;
+    }
+
+    private static void encrypt(String string) {
+        int len = string.length();
+        int code = 0;
+        int[] arrEncrypt = new int[len];
+        for (int j = 0; j < len; j++) {
+            arrEncrypt[j] = string.charAt(j) - code;
+            code = string.charAt(j);
+            System.out.print(arrEncrypt[j]);
+            if (j > 0) {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    private static String decrypt(int[] numbers) {
+        String string = "";
+        int code = 0;
+        for (int j = 0; j < numbers.length; j++) {
+            string += (char) (numbers[j] + code);
+            code = numbers[j] + code;
+        }
+        return string;
+    }
+
+    private static boolean canMove(String p, String c, String t) {
+        if (p.equals("Пешка")) {
+            if (c.charAt(0) == t.charAt(0)) {
+
+                if (c.charAt(1) == '2' && t.charAt(1) == '4') {
+                    return true;
+                }
+
+                if (c.charAt(1) == '7' && t.charAt(1) == '5') {
+                    return true;
+                }
+
+                if (Math.abs((int) c.charAt(1) - (int) t.charAt(1)) == 1) {
+                    return true;
+                }
+            }
+        }
+
+        if (p.equals("Слон")) {
+            if (Math.abs((int) c.charAt(0) - (int) t.charAt(0)) == Math.abs((int) c.charAt(1) - (int) t.charAt(1))) {
+                return true;
+            }
+        }
+
+        if (p.equals("Ладья")) {
+            if (c.charAt(0) == t.charAt(0)
+                    || c.charAt(1) == t.charAt(1)) {
+                return true;
+            }
+        }
+
+        if (p.equals("Конь")) {
+
+            if (Math.abs((int) c.charAt(0) - (int) t.charAt(0)) == 2
+                    && Math.abs((int) c.charAt(1) - (int) t.charAt(1)) == 1) {
+                return true;
+            }
+
+            if (Math.abs((int) c.charAt(1) - (int) t.charAt(1)) == 2
+                    && Math.abs((int) c.charAt(0) - (int) t.charAt(0)) == 1) {
+                return true;
+            }
+        }
+        if (p.equals("Король")) {
+            if (Math.abs((int) c.charAt(0) - (int) t.charAt(0)) <= 1
+                    && Math.abs((int) c.charAt(1) - (int) t.charAt(1)) <= 1) {
+                return true;
+            }
+        }
+        if (p.equals("Королева")) {
+            if (Math.abs((int) c.charAt(0) - (int) t.charAt(0)) == Math.abs((int) c.charAt(1) - (int) t.charAt(1))) {
+                return true;
+            }
+
+            if (c.charAt(0) == t.charAt(0)
+                    || c.charAt(1) == t.charAt(1)) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    private static boolean canComplete(String start, String string) {
+        int in = 0;
+
+        for (int w = 0; w < string.length(); w++) {
+            if (string.charAt(w) == start.charAt(in))
+                in++;
+        }
+
+        if (in == start.length())
+            return true;
+        else
+            return false;
+    }
+
+    private static int sumDigProd(int... i) {
+        int s = 0;
+        for (int n : i)
+            s += n;
+        if (s < 10)
+            return s;
+        int p = 1;
+        while (s > 0) {
+            p *= s % 10;
+            s /= 10;
+        }
+        return sumDigProd(p);
+    }
+
+    private static void sameVowelGroup(String[] strings) {
+
+        char[] chars = strings[0].toCharArray();
+        Set<Character> v = new HashSet<>();
+        for (char _char : chars) {
+            if (_char == 'a' || _char == 'e' || _char == 'i' || _char == 'o' || _char == 'u') {
+                v.add(_char);
+            }
+        }
+        for (String _string : strings) {
+            boolean isValid = true;
+            for (char c : _string.toCharArray()) {
+                if ((c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')) {
+                    if (!v.contains(c)) {
+                        isValid = false;
+                    }
+                }
+            }
+            if (isValid) {
+                System.out.print(_string + " ");
+            }
+        }
+
+    }
+
+    private static boolean validateCard(long numero) {
+
+        int strLen = String.valueOf(numero).length();
+        if ((strLen < 14) || (strLen > 19))
+            return false;
+        int last_digit = (int) (numero % 10);
+        StringBuilder stringNumber = new StringBuilder(String.valueOf(numero / 10)).reverse();
+        int temp = 0;
+        for (int i = 0; i < stringNumber.length(); i = i + 2) {
+            temp = Integer.parseInt(stringNumber.charAt(i) + "") * 2;
+            if (temp / 10 > 0) {
+                temp = temp / 10 + temp % 10;
+            }
+            stringNumber.replace(i, i + 1, String.valueOf(temp));
+        }
+        temp = 0;
+        for (char x : stringNumber.toString().toCharArray()) {
+            temp += Integer.parseInt(x + "");
+        }
+
+        return ((10 - (temp % 10)) == last_digit);
+
+    }
+
+    private static String numToEng(int n) {
+        String[] ones = { "zero", "one", "two", "three", "four", "five", "six", "seven",
+                "eight", "nine" };
+        String[] twenties = { "ten", "eleven", "twelve", "thirten", "fourten", "fifteen",
+                "sixteen", "seventeen", "eighten", "nineteen" };
+        String[] tens = { "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
+                "ninety" };
+        String numero = Integer.toString(n);
+
+        switch (numero.length()) {
+            case 1:
+                return ones[Integer.parseInt(numero)];
+            case 2:
+                return twenties[Integer.parseInt(numero)];
+            case 3:
+                StringBuilder sb = new StringBuilder();
+                int[] digits = new int[3];
+                int k = 0;
+                while (n != 0) {
+                    digits[k] = n % 10;
+                    n = n / 10;
+                    k++;
+                }
+                sb.append(ones[digits[2]]).append(" hundred ");
+                if (digits[1] == 1) {
+                    int c = digits[1] + digits[2];
+                    sb.append(twenties[c]);
+                    return sb.toString();
+                }
+                if (digits[1] > 1)
+                    sb.append(tens[digits[1] - 1]).append(" ");
+                if (digits[0] > 0)
+                    sb.append(ones[digits[0]]);
+                return sb.toString();
+            default:
+                break;
+        }
+        return "";
+    }
+
+    private static String getSha256Hash(String str) {
+        return hash(str, "SHA-256");
+    }
+
+    private static String hash(String msg, String algo) {
+        String result = "";
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance(algo);
+            byte[] hashes = md.digest(msg.getBytes());
+            for (int i = 0; i < hashes.length; i++) {
+                String hex = Integer.toHexString(0xff & hashes[i]);
+                if (hex.length() == 1)
+                    result += 0;
+                result += hex;
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private static String correctTitle(String str) {
+        String[] strings = str.split(" ");
+        String output = "";
+        for (int i = 0; i < strings.length; i++) {
+            if (i > 0) {
+                output += " ";
+            }
+            String[] _strings = strings[i].split("-");
+            for (int j = 0; j < _strings.length; j++) {
+                if (j > 0) {
+                    output += "-";
+                }
+                if (_strings[j].equalsIgnoreCase("and")
+                        || _strings[j].equalsIgnoreCase("the")
+                        || _strings[j].equalsIgnoreCase("of")
+                        || _strings[j].equalsIgnoreCase("in")) {
+                    output += _strings[j].toLowerCase();
+                } else {
+                    output += _strings[j].substring(0, 1).toUpperCase();
+                    output += _strings[j].substring(1).toLowerCase();
+                }
+            }
+        }
+
+        return output;
+    }
+
+    private static String hexLattice(int n) {
+        int i = 0;
+        boolean isHex = false;
+        while (3 * i * (i + 1) + 1 <= n) {
+            if (3 * i * (i + 1) + 1 == n)
+                isHex = true;
+            i++;
+        }
+        String str = "";
+        if (isHex) {
+            int l = i;
+            int m = i;
+            String str2;
+            for (int j = 0; j < 2 * i - 1; j++) {
+                str += "\n";
+                str2 = "";
+                for (int k = 1; k < m; k++) {
+                    str2 += " ";
+                }
+                str += str2;
+                for (int k = 0; k < l; k++) {
+                    str += " o";
+                }
+                str += str2 + " ";
+                l += (j < i - 1) ? 1 : -1;
+                m += (j < i - 1) ? -1 : 1;
+            }
+            str = str.replaceFirst("\n", "");
+            return str;
+        } else
+            return "Invalid";
     }
 
     private static boolean isVowel(char ch) {
