@@ -1,21 +1,15 @@
 /**
- * This class represents a specific location in a 2D map. Coordinates are
- * integer values.
+ * Локация в 2D
  **/
 public class Location {
-    /** X coordinate of this location. **/
     public int xCoord;
-
-    /** Y coordinate of this location. **/
     public int yCoord;
 
-    /** Creates a new location with the specified integer coordinates. **/
     public Location(int x, int y) {
         xCoord = x;
         yCoord = y;
     }
 
-    /** Creates a new location with coordinates (0, 0). **/
     public Location() {
         this(0, 0);
     }
@@ -25,25 +19,26 @@ public class Location {
             return false;
         }
 
+        // Проверяем что объект - Location
         if (obj instanceof Location) {
-            // Cast other object to Point3d type, then compare.
+            // Делаем неявное преобразование (каустуем)
             Location other = (Location) obj;
 
+            // Сравниваем координаты
             if (xCoord == other.xCoord &&
-                    yCoord == other.yCoord) {
+                    yCoord == other.yCoord)
                 return true;
-            }
         }
-
         return false;
     }
 
+    // Хеширование чтобы идентифицировать уникальные объекты
     public int hashCode() {
-        int result = 19; // Some prime value
+        // Случайное просто числое
+        int result = 3;
 
-        // Use another prime value to combine
-        result = 17 * result + (xCoord * 11);
-        result = 23 * result + (yCoord * 13);
+        result = 5 * result + (xCoord * 7);
+        result = 11 * result + (yCoord * 13);
 
         return result;
     }

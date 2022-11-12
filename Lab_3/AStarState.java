@@ -11,10 +11,8 @@ public class AStarState {
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
 
-    /** collections of open waypoints **/
     private HashMap<Location, Waypoint> openWaypoints;
 
-    /** collections of closed waypoints **/
     private HashMap<Location, Waypoint> closedWaypoints;
 
     /**
@@ -35,11 +33,7 @@ public class AStarState {
         return map;
     }
 
-    /**
-     * This method scans through all open waypoints, and returns the waypoint
-     * with the minimum total cost. If there are no open waypoints, this method
-     * returns <code>null</code>.
-     **/
+    // Возвращает вейпоинт с наименьшим расстоянием, либо null
     public Waypoint getMinOpenWaypoint() {
         Waypoint sol = null;
 
@@ -58,19 +52,15 @@ public class AStarState {
         return sol;
     }
 
-    /**
-     * This method adds a waypoint to (or potentially updates a waypoint already
-     * in) the "open waypoints" collection. If there is not already an open
-     * waypoint at the new waypoint's location then the new waypoint is simply
-     * added to the collection. However, if there is already a waypoint at the
-     * new waypoint's location, the new waypoint replaces the old one <em>only
-     * if</em> the new waypoint's "previous cost" value is less than the current
-     * waypoint's "previous cost" value.
-     **/
+    /*
+     * Добавляет вейпоинт в openWaypoints, если нет вейпоинта для данного
+     * местоположения, то добавляет новый, если есть меняет на новый старый
+     * если путь меньше
+     */
     public boolean addOpenWaypoint(Waypoint newWP) {
-        Waypoint other = openWaypoints.get(newWP.getLocation());
+        Waypoint temp = openWaypoints.get(newWP.getLocation());
 
-        if (other == null || newWP.getPreviousCost() < other.getPreviousCost()) {
+        if (temp == null || newWP.getPreviousCost() < temp.getPreviousCost()) {
             openWaypoints.put(newWP.getLocation(), newWP);
             return true;
         }
@@ -78,15 +68,12 @@ public class AStarState {
         return false;
     }
 
-    /** Returns the current number of open waypoints. **/
+    // Получить текущий размер открытых вейпоинтов
     public int numOpenWaypoints() {
         return openWaypoints.size();
     }
 
-    /**
-     * This method moves the waypoint at the specified location from the
-     * open list to the closed list.
-     **/
+    // Перемещает из закрытых в открытую
     public void closeWaypoint(Location loc) {
         Waypoint point = openWaypoints.remove(loc);
 
@@ -95,10 +82,7 @@ public class AStarState {
         }
     }
 
-    /**
-     * Returns true if the collection of closed waypoints contains a waypoint
-     * for the specified location.
-     **/
+    // Возвращает true если closedWaypoints содержит вейпоинт
     public boolean isLocationClosed(Location loc) {
         return closedWaypoints.containsKey(loc);
     }

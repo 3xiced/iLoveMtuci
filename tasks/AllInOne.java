@@ -767,15 +767,14 @@ public class AllInOne {
 
     private static String findEndChars(String str) {
         if (str.length() <= 2)
-            return "Incompatible.";
+            return "Несовместимо.";
         char[] ch1 = new char[str.length()];
 
         for (int i = 0; i < str.length(); i++) {
             ch1[i] = str.charAt(i);
         }
         if (ch1[0] == ch1[str.length() - 1])
-            return "Two's a pair";
-        char buffer = ch1[0];
+            return "Два это пара";
         String output = "";
         for (int i = 1; i < ch1.length - 1; i++) {
             output += ch1[i];
@@ -821,7 +820,6 @@ public class AllInOne {
                 return true;
         }
 
-        // compare with original number
         return false;
     }
 
